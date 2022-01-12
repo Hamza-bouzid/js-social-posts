@@ -64,7 +64,7 @@ for (let i = 0; i < posts.length; i++) {
             <div class="post__header">
                 <div class="post-meta">                    
                     <div class="post-meta__icon">
-                        <img class="profile-pic" src="${posts[i].author.image == null ? "https://unsplash.it/300/300?image=40" : posts[i].author.image}" alt="${posts[i].author.name}">                    
+                        ${posts[i].author.image == null ? getIniziali(posts[i].author.name) : getImage(posts[i].author)}                    
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${posts[i].author.name}</div>
@@ -136,4 +136,23 @@ function reverseString(data) {
 
   let joinArray = reverseArray.join("-");
   return joinArray;
+}
+
+// Funzione per inserire l'immagine in caso fosse presente
+function getImage(autore) {
+  return `
+  <img class="profile-pic" src="${autore.image}" alt="${autore.name}">
+  `
+}
+// Funzione per ottene le iniziali dell'autore del post
+function getIniziali(autore) {
+  let parti = autore.split(" ");
+  let iniziali = "";
+
+  for (let i = 0; i < parti.length; i++) {
+    iniziali += parti[i][0];
+    
+  }
+  console.log(iniziali);
+  return `<div class="profile-pic-default"><span>${iniziali}</span></div>`;
 }
